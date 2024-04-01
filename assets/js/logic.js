@@ -113,3 +113,29 @@ function endQuiz()
     document.getElementById('end-screen').classList.remove('hide'); // Show end screen
     document.getElementById('final-score').textContent = time; // Display final score
 }
+
+
+// Save top score event listener
+document.getElementById('submit').addEventListener('click', recordTopScore);
+
+
+// Records the top score
+function recordTopScore()
+{
+    // Get user initials
+    const initials = document.getElementById('initials').value.trim(); 
+
+    // check if initial is not empty
+    if(initials !== "")
+    {
+        const topscores = JSON.parse(localStorage.getItem("highscores")) || []; // Get existing scores
+        const newScore = {
+            score: time,
+            initials: initials
+        };
+
+        topscores.push(newScore); // Add this new score
+        localStorage.setItem("highscores", JSON.stringify(topscores)); // Save score in local storage
+        window.location.href = "highscores.html"; // Go to high scores page
+    }
+}
