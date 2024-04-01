@@ -29,11 +29,28 @@ let currentQuestionNumber = 0;
 function getQuestion()
 {
     const currentQuestion = questions[currentQuestionNumber];
-    // Show current question
+    // Show current question title
     document.getElementById('question-title').textContent = currentQuestion.title;
     // Clear out the old question choices
     const choicesEl = document.getElementById('choices');
     choicesEl.innerHTML = '';
 
+    // Create a button for each choice
+    currentQuestion.choices.forEach(function(choice, i)
+    {
+      const choiceNode = document.createElement('button');
+      choiceNode.setAttribute('class', 'choice');
+      choiceNode.setAttribute('value', choice);
+      choiceNode.textContent = `${i + 1}. ${choice}`;
+      // attach click event to each choice
+      choiceNode.onclick = questionClick;
+      // display the choice buttons
+      choicesEl.appendChild(choiceNode);
+    });
+}
+
+// On clicking choice events
+function questionClick()
+{
     
-  }
+}
