@@ -5,7 +5,7 @@ document.getElementById('start').addEventListener('click', beginQuiz);
 
 
 let timer;
-let time = questions.length * 10;
+let time = codingAssessment.length * 10;
 
 // Start Quiz
 function beginQuiz()
@@ -28,7 +28,7 @@ let currentQuestionNumber = 0;
 // Retrieve and show the current question
 function getQuestion()
 {
-    const currentQuestion = questions[currentQuestionNumber];
+    const currentQuestion = codingAssessment[currentQuestionNumber];
     // Show current question title
     document.getElementById('question-title').textContent = currentQuestion.title;
     // Clear out the old question choices
@@ -128,14 +128,14 @@ function recordTopScore()
     // check if initial is not empty
     if(initials !== "")
     {
-        const topscores = JSON.parse(localStorage.getItem("highscores")) || []; // Get existing scores
+        const highscores = JSON.parse(localStorage.getItem("highscores")) || []; // Get existing scores
         const newScore = {
             score: time,
             initials: initials
         };
 
-        topscores.push(newScore); // Add this new score
-        localStorage.setItem("highscores", JSON.stringify(topscores)); // Save score in local storage
+        highscores.push(newScore); // Add this new score
+        localStorage.setItem("highscores", JSON.stringify(highscores)); // Save score in local storage
         window.location.href = "highscores.html"; // Go to high scores page
     }
 }
