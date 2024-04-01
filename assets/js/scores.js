@@ -4,6 +4,17 @@ function printHighscores()
 {
     const highscores = JSON.parse(localStorage.getItem("highscores")) || []; // Get highscores from storage
     
+    // Sort highscores
+    highscores.sort((a, b) => b.score - a.score); 
+  
+    // Loop through and display each high score
+    highscores.forEach(function(score)
+    {
+        // Create list item for each score and add to list
+        const liTag = document.createElement('li');
+        liTag.textContent = `${score.initials} - ${score.score}`;
+        document.getElementById('highscores').appendChild(liTag);
+    });
 }
   
 // Function to clear high scores from local storage
