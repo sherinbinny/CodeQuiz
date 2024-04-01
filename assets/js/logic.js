@@ -69,7 +69,7 @@ function questionClick()
     currentQuestionNumber++;
     if(currentQuestionNumber === codingAssessment.length || time <= 0)
     {
-        
+        endQuiz(); // No more questions or time is up
     }
     else
     {
@@ -90,4 +90,26 @@ function showResult(text)
         // Hide feedback after 1 second
         resultEl.classList.add('hide');
     }, 1000);
+}
+
+
+// Timer function
+function timeIncrement()
+{
+    time--; // Decrement time
+    document.getElementById('time').textContent = time; // Update time shown
+    if(time <= 0)
+    {
+        endQuiz(); // End quiz if time runs out
+    }
+}
+
+
+// Ends the quiz
+function endQuiz()
+{
+    clearInterval(timer); // Stop the timer
+    document.getElementById('questions').classList.add('hide'); // Hide questions
+    document.getElementById('end-screen').classList.remove('hide'); // Show end screen
+    document.getElementById('final-score').textContent = time; // Display final score
 }
