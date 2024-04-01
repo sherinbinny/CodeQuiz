@@ -52,5 +52,42 @@ function getQuestion()
 // On clicking choice events
 function questionClick()
 {
-    
+    // Check if incorrect answer
+    if(this.value !== codingAssessment[currentQuestionNumber].answer)
+    {
+        time -= 10; // Penalize time when answer is wrong
+        if (time < 0) time = 0; // Don't allow negative time
+        document.getElementById('time').textContent = time; // Update time display
+        showResult("Wrong!"); // Show result
+    }
+    else
+    {
+        showResult("Correct!"); // Show result
+    }
+
+    // Move to the next question or end the quiz
+    currentQuestionNumber++;
+    if(currentQuestionNumber === codingAssessment.length || time <= 0)
+    {
+        
+    }
+    else
+    {
+        getQuestion(); // Next question
+    }
+}
+
+
+// Displays result for user's answer
+function showResult(text)
+{
+    const resultEl = document.getElementById('feedback');
+    resultEl.textContent = text; // Set feedback text
+    resultEl.classList.remove('hide'); // Show feedback
+
+    setTimeout(function()
+    {
+        // Hide feedback after 1 second
+        resultEl.classList.add('hide');
+    }, 1000);
 }
